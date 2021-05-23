@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="moviedb:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>moviedb</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="moviedb-1.0.war">
+      <element id="artifact" artifact-name="moviedb:war exploded" />
+    </root>
+  </artifact>
+</component>
