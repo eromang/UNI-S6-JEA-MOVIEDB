@@ -152,4 +152,6 @@ public class MovieDB implements Serializable {
     public void setMovieStudioAddress(String movieStudioAddress) {
         this.movieStudioAddress = movieStudioAddress;
     }
+
+
 }
