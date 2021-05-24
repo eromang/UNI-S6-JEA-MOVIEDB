@@ -59,9 +59,15 @@ public class Movie implements Serializable {
     @JoinColumn(name="studioName", referencedColumnName="name")
     private Studio studio;
 
-
     // Todo implement OneToOne relation with composite primary key
     // For StarsIn
+
+    //@OneToOne
+    //@PrimaryKeyJoinColumns({
+    //        @PrimaryKeyJoinColumn(name="title", referencedColumnName="title"),
+    //        @PrimaryKeyJoinColumn(name="year", referencedColumnName="year")
+    //})
+    //private StarsIn starsIn;
 
     // Empty constructor
 

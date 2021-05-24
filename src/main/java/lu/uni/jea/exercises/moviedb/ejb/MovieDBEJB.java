@@ -48,8 +48,14 @@ public class MovieDBEJB implements MovieDBEJBI {
 
     /**
      *
-     * @return
+     * @return A specific Movie
      */
+
+    public Movie getMovie(String title, int year) {
+        MovieID movieID = new MovieID(title,year);
+        Movie movie = em.find(Movie.class, movieID);
+        return movie;
+    }
 
     // TODO: To adapt to need
 

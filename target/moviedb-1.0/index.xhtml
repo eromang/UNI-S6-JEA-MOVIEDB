@@ -12,8 +12,6 @@
 <h:body>
     <h1>UNI S6 JEA - Exercise 3 - Movie DB - Eric ROMANG</h1>
 
-
-    <h:form>
         <div class="card">
             <p:dataTable var="ml" value="#{moviedb.movieList}">
                 <p:column headerText="Movie Title">
@@ -33,15 +31,21 @@
                 </p:column>
 
                 <p:column headerText="Exec">
-                    <h:outputText value="#{ml.movieExec}" />
+                    <h:outputText value="#{ml.movieExec.name}" />
                 </p:column>
 
-                <p:column headerText="Exec">
+                <p:column headerText="Studio">
                     <h:outputText value="#{ml.studio.name}" />
+                </p:column>
+
+                <p:column headerText="Actions">
+                    <h:form>
+                        <h:commandButton id="edit" action="#{moviedb.editMovie(ml.title,ml.year)}" value="Edit"/>
+                    </h:form>
                 </p:column>
             </p:dataTable>
         </div>
-    </h:form>
+
 
 </h:body>
 </html>

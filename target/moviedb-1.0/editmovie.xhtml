@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en">
+<h:head>
+    <title>UNI S6 JEA - Exercise 3 - Movie details - Eric ROMANG</title>
+</h:head>
+<h:body>
+    <h1>UNI S6 JEA - Exercise 3 - Movie details - Eric ROMANG</h1>
+
+    <table>
+        <tr style="vertical-align: top">
+            <td>
+                <p:fieldset legend="Movie Details">
+                    <p class="p-m-0">
+
+                            <p:panelGrid columns="2">
+
+                                <h:outputText value="Movie name :"/>
+                                <h:outputText value="#{moviedb.movieTitle}"/>
+
+                                <h:outputText value="Release year:"/>
+                                <h:outputText value="#{moviedb.movieYear}"/>
+
+                                <h:outputText value="Length:"/>
+                                <h:outputText value="#{moviedb.movieLength}"/>
+
+                                <h:outputText value="In color:"/>
+                                <h:outputText value="#{moviedb.movieInColor}"/>
+
+                            </p:panelGrid>
+
+                    </p>
+                </p:fieldset>
+            </td>
+            <td>
+                <p:fieldset legend="Executive Details">
+                    <p class="p-m-0">
+
+                        <p:panelGrid columns="2">
+
+                            <h:outputText value="Executive name :"/>
+                            <h:outputText value="#{moviedb.movieExecName}"/>
+
+                            <h:outputText value="Executive address :"/>
+                            <h:outputText value="#{moviedb.movieExecAddress}"/>
+
+                            <h:outputText value="Executive net worth :"/>
+                            <h:outputText value="#{moviedb.movieExecNetWorth}"/>
+
+                        </p:panelGrid>
+
+                    </p>
+                </p:fieldset>
+            </td>
+            <td>
+                <p:fieldset legend="Studio Details">
+                    <p class="p-m-0">
+
+                        <p:panelGrid columns="2">
+
+                            <h:outputText value="Studio name :"/>
+                            <h:outputText value="#{moviedb.movieStudio}"/>
+
+                            <h:outputText value="Studio address :"/>
+                            <h:outputText value="#{moviedb.movieStudioAddress}"/>
+
+                        </p:panelGrid>
+
+                    </p>
+                </p:fieldset>
+            </td>
+            <td>
+                <p:fieldset legend="Stars Details">
+                    <p class="p-m-0">
+
+                        <p:panelGrid columns="2">
+
+                            <h:outputText value="Executive name :"/>
+                            <h:outputText value="#{moviedb.movieExecName}"/>
+
+                        </p:panelGrid>
+
+                    </p>
+                </p:fieldset>
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <div>
+        <h:form>
+            <h:commandButton id="back" action="#{moviedb.back}" value="Back"/>
+        </h:form>
+    </div>
+
+</h:body>
+</html>
