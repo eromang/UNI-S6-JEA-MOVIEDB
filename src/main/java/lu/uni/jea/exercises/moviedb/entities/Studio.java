@@ -25,14 +25,17 @@ public class Studio implements Serializable {
     @Basic
     private String address;
 
+    @Basic
+    private Integer presCertN;
+
     // Implementation of the ManyToOne to MovieExec
     // Studio table contain multiple occurrence of the same MovieExec
     // MovieExec table contain only a single instance of a uniq MovieExec
     // Cascade on update and delete and cannot be null
 
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="presCertN", nullable=false)
-    private MovieExec movieExec;
+    //@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    //@JoinColumn(name="presCertN", nullable=false)
+    //private MovieExec movieExec;
 
     // Empty constructor
     public Studio() {}
@@ -41,7 +44,7 @@ public class Studio implements Serializable {
     public Studio(String name, String address, MovieExec movieExec) {
         this.setName(name);
         this.setAddress(address);
-        this.setMovieExec(movieExec);
+        //this.setMovieExec(movieExec);
     }
 
     // Getters and Setters
@@ -62,6 +65,7 @@ public class Studio implements Serializable {
         this.address = address;
     }
 
+    /*
     public MovieExec getMovieExec() {
         return movieExec;
     }
@@ -69,5 +73,13 @@ public class Studio implements Serializable {
     public void setMovieExec(MovieExec movieExec) {
         this.movieExec = movieExec;
     }
+    */
 
+    public Integer getPresCertN() {
+        return presCertN;
+    }
+
+    public void setPresCertN(Integer presCertN) {
+        this.presCertN = presCertN;
+    }
 }

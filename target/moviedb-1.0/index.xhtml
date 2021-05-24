@@ -16,7 +16,7 @@
     <h:form>
         <div class="card">
             <p:dataTable var="ml" value="#{moviedb.movieList}">
-                <p:column headerText="Title">
+                <p:column headerText="Movie Title">
                     <h:outputText value="#{ml.title}" />
                 </p:column>
 
@@ -33,7 +33,11 @@
                 </p:column>
 
                 <p:column headerText="Exec">
-                    <h:outputText value="#{ml.movieExec.name}" />
+                    <h:outputText value="#{ml.movieExec}" />
+                </p:column>
+
+                <p:column headerText="Exec">
+                    <h:outputText value="#{ml.studio.name}" />
                 </p:column>
             </p:dataTable>
         </div>

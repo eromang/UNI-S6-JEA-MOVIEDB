@@ -46,6 +46,11 @@ public class MovieDBEJB implements MovieDBEJBI {
         return query.getResultList();
     }
 
+    /**
+     *
+     * @return
+     */
+
     // TODO: To adapt to need
 
     public String getMovieName() {

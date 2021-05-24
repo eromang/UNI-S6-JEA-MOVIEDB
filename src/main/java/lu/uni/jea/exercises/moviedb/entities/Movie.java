@@ -47,10 +47,17 @@ public class Movie implements Serializable {
     @JoinColumn(name="producerCertN", nullable=false)
     private MovieExec movieExec;
 
-    // TODO : Implement the ManyToMany to Studio
-    // Movie table contain multiple occurrence of the same studio
-    // But studio table could contain multiple instances of the same studio
+    // Implement the ManyToOne from Movie to Studio
+    // Movie table contain multiple occurrences of the Movie(studioName) with same Movie(producerCertN)
+    // But Studio table contain only 1 occurrence of Studio(name) + Studio(presCertN)
 
+    //@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    //@JoinColumn(name="studioName", referencedColumnName="name")
+    //private Studio studio;
+
+    @ManyToOne
+    @JoinColumn(name="studioName", referencedColumnName="name")
+    private Studio studio;
 
 
     // Todo implement OneToOne relation with composite primary key
@@ -62,12 +69,13 @@ public class Movie implements Serializable {
 
     // TODO Constructor
 
-    public Movie(String title, int year, int length, String inColor, MovieExec movieExec) {
+    public Movie(String title, int year, int length, String inColor, MovieExec movieExec, Studio studio) {
         this.setTitle(title);
         this.setYear(year);
         this.setLength(length);
         this.setInColor(inColor);
         this.setMovieExec(movieExec);
+        this.setStudio(studio);
     }
 
     // Getters and Setters
@@ -112,4 +120,11 @@ public class Movie implements Serializable {
         this.movieExec = movieExec;
     }
 
+    public Studio getStudio() {
+        return studio;
+    }
+
+    public void setStudio(Studio studio) {
+        this.studio = studio;
+    }
 }
