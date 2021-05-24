@@ -2,25 +2,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xml:lang="en">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en">
 <h:head>
-    <title>Testing</title>
+    <title>UNI S6 JEA - Exercise 3 - Movie DB - Eric ROMANG</title>
 </h:head>
 <h:body>
-    <h1>Testing</h1>
+    <h1>UNI S6 JEA - Exercise 3 - Movie DB - Eric ROMANG</h1>
 
 
-    <ui:fragment rendered="${not empty moviedbejb.movieName}">
-        <div style="padding-top:5mm">
-            <h:outputText value="Found movie name as '${moviedbejb.movieName}'"/>
+    <h:form>
+        <div class="card">
+            <p:dataTable var="ml" value="#{moviedb.movieList}">
+                <p:column headerText="Title">
+                    <h:outputText value="#{ml.title}" />
+                </p:column>
+
+                <p:column headerText="Year">
+                    <h:outputText value="#{ml.year}" />
+                </p:column>
+
+                <p:column headerText="Length (min.)">
+                    <h:outputText value="#{ml.length}" />
+                </p:column>
+
+                <p:column headerText="In color">
+                    <h:outputText value="#{ml.inColor}" />
+                </p:column>
+
+                <p:column headerText="Exec">
+                    <h:outputText value="#{ml.movieExec.name}" />
+                </p:column>
+            </p:dataTable>
         </div>
-    </ui:fragment>
-
-    <ui:fragment rendered="${not empty moviedbejb.movieExecName}">
-        <div style="padding-top:5mm">
-            <h:outputText value="Found movie exec name as '${moviedbejb.movieExecName}'"/>
-        </div>
-    </ui:fragment>
+    </h:form>
 
 </h:body>
 </html>

@@ -11,6 +11,9 @@ import javax.ejb.TransactionAttribute;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.TypedQuery;
+
+import java.util.List;
 
 import static javax.ejb.TransactionAttributeType.MANDATORY;
 
@@ -32,6 +35,18 @@ public class MovieDBEJB implements MovieDBEJBI {
 
     private String movieName;
     private String movieExecName;
+
+    /**
+     *
+     * @return List of all Movies
+     */
+
+    public List<Movie> getMovieList() {
+        TypedQuery<Movie> query = em.createNamedQuery("Movie.getMovieList", Movie.class);
+        return query.getResultList();
+    }
+
+    // TODO: To adapt to need
 
     public String getMovieName() {
         MovieID movieID = new MovieID("Skyfall",2012);

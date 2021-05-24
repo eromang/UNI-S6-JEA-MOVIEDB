@@ -1,6 +1,7 @@
 package lu.uni.jea.exercises.moviedb.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -15,14 +16,20 @@ import java.io.Serializable;
 @Entity
 @IdClass(MovieID.class) // for composite primary key
 @Table(name = "Movie")
+@NamedQueries({
+        @NamedQuery(name = "Movie.getMovieList",
+                query = "SELECT p FROM Movie p")
+})
 public class Movie implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id // Primary key
+    @NotNull
     private String title;
 
     @Id // Primary key
+    @NotNull
     private Integer year;
 
     @Basic

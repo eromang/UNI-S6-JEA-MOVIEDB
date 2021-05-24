@@ -1,6 +1,7 @@
 package lu.uni.jea.exercises.moviedb.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -18,6 +19,7 @@ public class Studio implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @NotNull
     private String name;
 
     @Basic

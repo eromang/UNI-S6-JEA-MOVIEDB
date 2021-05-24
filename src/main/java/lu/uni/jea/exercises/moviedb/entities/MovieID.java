@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import javax.persistence.Basic;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -21,9 +22,11 @@ public class MovieID implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Basic
+    @NotNull
     private String title;
 
     @Basic
+    @NotNull
     private int year;
 
     // Logging for debug

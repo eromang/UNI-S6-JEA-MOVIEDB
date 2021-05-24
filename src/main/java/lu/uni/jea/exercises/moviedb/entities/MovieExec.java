@@ -1,6 +1,7 @@
 package lu.uni.jea.exercises.moviedb.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -18,10 +19,12 @@ public class MovieExec implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @NotNull
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer certN;
 
     @Basic
+    @NotNull
     private String name;
 
     @Basic
