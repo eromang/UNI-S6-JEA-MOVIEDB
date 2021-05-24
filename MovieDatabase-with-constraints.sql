@@ -1,4 +1,6 @@
-﻿-- MovieExec
+﻿-- DROP TABLE IF EXISTS Movie, MovieExec, Studio, StarsIn;
+
+-- MovieExec
 
 CREATE TABLE MovieExec (
 	name 		CHAR(30),
@@ -12,7 +14,7 @@ CREATE TABLE MovieExec (
 CREATE TABLE Studio (
 	name	 	CHAR(30) PRIMARY KEY,
 	address		VARCHAR(255),
-	presCertN   	INTEGER REFERENCES MovieExec(certN) ON DELETE CASCADE ON UPDATE CASCADE
+	presCertN   INTEGER REFERENCES MovieExec(certN) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Movie
@@ -44,12 +46,22 @@ INSERT INTO MovieExec VALUES ('Cameron', 'LA', 555, 1000000);
 INSERT INTO MovieExec VALUES ('Spielberg', 'NYC', 456, 25000000);
 INSERT INTO MovieExec VALUES ('Broccoli', 'SF', 333, 500000);
 
+/*
 INSERT INTO Studio VALUES ('Fox', 'LA', 555);
 INSERT INTO Studio VALUES ('Disney', 'LA', 555);
 INSERT INTO Studio VALUES ('Hemdale', 'LA', 555);
 INSERT INTO Studio VALUES ('Carcolo', 'NYC', 456);
 INSERT INTO Studio VALUES ('IMF', 'LV', 456);
 INSERT INTO Studio VALUES ('Warner', 'LA', 333);
+*/
+
+-- Added due to inconsistencies in the table Studio
+INSERT INTO Studio VALUES ('Fox', 'LA', 333);
+INSERT INTO Studio VALUES ('Disney', 'LA', 456);
+INSERT INTO Studio VALUES ('Hemdale', 'LA', 555);
+INSERT INTO Studio VALUES ('Carcolo', 'NYC', 555);
+INSERT INTO Studio VALUES ('IMF', 'LV', 555);
+INSERT INTO Studio VALUES ('Warner', 'LA', 456);
 
 INSERT INTO Movie VALUES ('Skyfall', 2012, 120, 'T', 'Fox', 333);
 INSERT INTO Movie VALUES ('QuantumOfSolace', 2008, 134, 'C', 'Fox', 333);

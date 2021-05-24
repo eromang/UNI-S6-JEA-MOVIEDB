@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xml:lang="en">
+<h:head>
+    <title>Testing</title>
+</h:head>
+<h:body>
+    <h1>Testing</h1>
+
+
+    <ui:fragment rendered="${not empty moviedb.movieName}">
+        <div style="padding-top:5mm">
+            <h:outputText value="Found movie name as '${moviedb.movieName}'"/>
+        </div>
+    </ui:fragment>
+
+    <ui:fragment rendered="${not empty moviedb.movieExecName}">
+        <div style="padding-top:5mm">
+            <h:outputText value="Found movie exec name as '${moviedb.movieExecName}'"/>
+        </div>
+    </ui:fragment>
+
+</h:body>
+</html>
+
