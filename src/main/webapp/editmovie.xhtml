@@ -20,7 +20,7 @@
 
                             <p:panelGrid columns="2">
 
-                                <h:outputText value="Movie name :"/>
+                                <h:outputText value="Name :"/>
                                 <h:outputText value="#{moviedb.movieTitle}"/>
 
                                 <h:outputText value="Release year:"/>
@@ -38,18 +38,18 @@
                 </p:fieldset>
             </td>
             <td>
-                <p:fieldset legend="Executive Details">
+                <p:fieldset legend="Producer Details">
                     <p class="p-m-0">
 
                         <p:panelGrid columns="2">
 
-                            <h:outputText value="Executive name :"/>
+                            <h:outputText value="Name :"/>
                             <h:outputText value="#{moviedb.movieExecName}"/>
 
-                            <h:outputText value="Executive address :"/>
+                            <h:outputText value="Address :"/>
                             <h:outputText value="#{moviedb.movieExecAddress}"/>
 
-                            <h:outputText value="Executive net worth :"/>
+                            <h:outputText value="Net worth :"/>
                             <h:outputText value="#{moviedb.movieExecNetWorth}"/>
 
                         </p:panelGrid>
@@ -63,11 +63,20 @@
 
                         <p:panelGrid columns="2">
 
-                            <h:outputText value="Studio name :"/>
+                            <h:outputText value="Name :"/>
                             <h:outputText value="#{moviedb.movieStudio}"/>
 
-                            <h:outputText value="Studio address :"/>
+                            <h:outputText value="Address :"/>
                             <h:outputText value="#{moviedb.movieStudioAddress}"/>
+
+                            <h:outputText value="President :"/>
+                            <h:outputText value="#{moviedb.movieStudioPresident}"/>
+
+                            <h:outputText value="President address :"/>
+                            <h:outputText value="#{moviedb.movieStudioPresidentAddress}"/>
+
+                            <h:outputText value="President net worth :"/>
+                            <h:outputText value="#{moviedb.movieStudioPresidentNetWorth}"/>
 
                         </p:panelGrid>
 
@@ -80,8 +89,8 @@
 
                         <p:panelGrid columns="2">
 
-                            <h:outputText value="Executive name :"/>
-                            <h:outputText value="#{moviedb.movieExecName}"/>
+                            <h:outputText value="Star name :"/>
+                            <h:outputText value="#{moviedb.starsInName}"/>
 
                         </p:panelGrid>
 

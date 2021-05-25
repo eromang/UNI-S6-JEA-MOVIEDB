@@ -1,0 +1,138 @@
+-- MariaDB dump 10.19  Distrib 10.5.10-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: 127.0.0.1    Database: javaee
+-- ------------------------------------------------------
+-- Server version	5.7.34
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `Movie`
+--
+
+DROP TABLE IF EXISTS `Movie`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Movie` (
+  `title` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `year` int(11) NOT NULL,
+  `length` int(11) DEFAULT NULL,
+  `inColor` char(1) CHARACTER SET latin1 DEFAULT NULL,
+  `studioName` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `producerCertN` int(11) DEFAULT NULL,
+  PRIMARY KEY (`title`,`year`),
+  KEY `producerCertN` (`producerCertN`),
+  CONSTRAINT `Movie_ibfk_1` FOREIGN KEY (`producerCertN`) REFERENCES `MovieExec` (`certN`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Movie`
+--
+
+LOCK TABLES `Movie` WRITE;
+/*!40000 ALTER TABLE `Movie` DISABLE KEYS */;
+INSERT INTO `Movie` VALUES ('MightyDucks',1990,90,'T','Disney',456),('QuantumOfSolace',2008,134,'C','Fox',333),('Skyfall',2012,120,'T','Fox',333),('Star Wars',1997,129,'T','Warner',456),('Terminator',1984,108,'F','Hemdale',555),('Terminator',1991,139,'T','Carcolo',555),('Terminator',2003,109,'T','IMF',555);
+/*!40000 ALTER TABLE `Movie` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MovieExec`
+--
+
+DROP TABLE IF EXISTS `MovieExec`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MovieExec` (
+  `name` char(30) CHARACTER SET latin1 DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `certN` int(11) NOT NULL,
+  `netWorth` int(11) DEFAULT NULL,
+  PRIMARY KEY (`certN`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MovieExec`
+--
+
+LOCK TABLES `MovieExec` WRITE;
+/*!40000 ALTER TABLE `MovieExec` DISABLE KEYS */;
+INSERT INTO `MovieExec` VALUES ('Broccoli','SF',333,500000),('Spielberg','NYC',456,25000000),('Cameron','LA',555,1000000);
+/*!40000 ALTER TABLE `MovieExec` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `StarsIn`
+--
+
+DROP TABLE IF EXISTS `StarsIn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `StarsIn` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) CHARACTER SET latin1 DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `year` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `title` (`title`,`year`),
+  CONSTRAINT `StarsIn_ibfk_1` FOREIGN KEY (`title`, `year`) REFERENCES `Movie` (`title`, `year`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `StarsIn`
+--
+
+LOCK TABLES `StarsIn` WRITE;
+/*!40000 ALTER TABLE `StarsIn` DISABLE KEYS */;
+INSERT INTO `StarsIn` VALUES (1,'Arnold','Terminator',1984),(2,'Arnold','Terminator',1991),(3,'Arnold','Terminator',2003),(4,'Nick','Terminator',2003);
+/*!40000 ALTER TABLE `StarsIn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Studio`
+--
+
+DROP TABLE IF EXISTS `Studio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Studio` (
+  `name` char(30) CHARACTER SET latin1 NOT NULL,
+  `address` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `presCertN` int(11) DEFAULT NULL,
+  PRIMARY KEY (`name`),
+  KEY `presCertN` (`presCertN`),
+  CONSTRAINT `Studio_ibfk_1` FOREIGN KEY (`presCertN`) REFERENCES `MovieExec` (`certN`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Studio`
+--
+
+LOCK TABLES `Studio` WRITE;
+/*!40000 ALTER TABLE `Studio` DISABLE KEYS */;
+INSERT INTO `Studio` VALUES ('Carcolo','NYC',456),('Disney','LA',555),('Fox','LA',555),('Hemdale','LA',555),('IMF','LV',456),('Warner','LA',333);
+/*!40000 ALTER TABLE `Studio` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-05-25  8:59:30

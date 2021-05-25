@@ -2,6 +2,7 @@ package lu.uni.jea.exercises.moviedb;
 
 import lu.uni.jea.exercises.moviedb.ejb.MovieDBEJBI;
 import lu.uni.jea.exercises.moviedb.entities.Movie;
+import lu.uni.jea.exercises.moviedb.entities.StarsIn;
 import org.apache.log4j.Logger;
 
 import javax.ejb.EJB;
@@ -10,6 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Named("moviedb")
@@ -22,6 +24,7 @@ public class MovieDB implements Serializable {
     private static final Logger logger = Logger.getLogger ( MovieDB.class );
 
     private List<Movie> movieList = new ArrayList<>();
+    private List<StarsIn> starsInList = new ArrayList<>();;
     private Movie movie;
 
     private String movieTitle;
@@ -35,6 +38,12 @@ public class MovieDB implements Serializable {
 
     private String movieStudio;
     private String movieStudioAddress;
+    private String movieStudioPresident;
+    private String movieStudioPresidentAddress;
+    private int movieStudioPresidentNetWorth;
+
+    private int starsInCount;
+    private String starsInName;
 
     @EJB
     private MovieDBEJBI movieDBEJBI;
@@ -63,6 +72,24 @@ public class MovieDB implements Serializable {
 
         movieStudio = movie.getStudio().getName();
         movieStudioAddress = movie.getStudio().getAddress();
+        movieStudioPresident = movie.getStudio().getStudioPresident().getName();
+        movieStudioPresidentAddress = movie.getStudio().getStudioPresident().getAddress();
+        movieStudioPresidentNetWorth = movie.getStudio().getStudioPresident().getNetWorth();
+
+        // No stars in the movie
+        if(movie.getStarsIn().size() == 0) {
+            starsInName = "No stars";
+        } else if(movie.getStarsIn().size() == 1) {
+            starsInList = movie.getStarsIn();
+            logger.info(starsInList);
+            Iterator<StarsIn> iterator = starsInList.iterator();
+            while(iterator.hasNext()){
+                StarsIn starsIn = iterator.next();
+                starsInName = starsIn.getName();
+            }
+        } else {
+            starsInName = "More than one star";
+        }
 
         return EDIT_MOVIE;
     }
@@ -153,5 +180,35 @@ public class MovieDB implements Serializable {
         this.movieStudioAddress = movieStudioAddress;
     }
 
+    public String getMovieStudioPresident() {
+        return movieStudioPresident;
+    }
 
+    public void setMovieStudioPresident(String movieStudioPresident) {
+        this.movieStudioPresident = movieStudioPresident;
+    }
+
+    public String getMovieStudioPresidentAddress() {
+        return movieStudioPresidentAddress;
+    }
+
+    public void setMovieStudioPresidentAddress(String movieStudioPresidentAddress) {
+        this.movieStudioPresidentAddress = movieStudioPresidentAddress;
+    }
+
+    public int getMovieStudioPresidentNetWorth() {
+        return movieStudioPresidentNetWorth;
+    }
+
+    public void setMovieStudioPresidentNetWorth(int movieStudioPresidentNetWorth) {
+        this.movieStudioPresidentNetWorth = movieStudioPresidentNetWorth;
+    }
+
+    public String getStarsInName() {
+        return starsInName;
+    }
+
+    public void setStarsInName(String starsInName) {
+        this.starsInName = starsInName;
+    }
 }

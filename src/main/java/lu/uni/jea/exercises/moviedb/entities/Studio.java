@@ -29,22 +29,28 @@ public class Studio implements Serializable {
     private Integer presCertN;
 
     // Implementation of the ManyToOne to MovieExec
+    // presCertN is the president of the Studio
     // Studio table contain multiple occurrence of the same MovieExec
     // MovieExec table contain only a single instance of a uniq MovieExec
     // Cascade on update and delete and cannot be null
 
     //@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    //@JoinColumn(name="presCertN", nullable=false)
-    //private MovieExec movieExec;
+    //@JoinColumn(name="presCertN", nullable=false, insertable = false, updatable = false)
+    //private MovieExec studioPresident;
+
+    @ManyToOne
+    @JoinColumn(name="presCertN", referencedColumnName="certN", nullable=false,
+            insertable = false, updatable = false)
+    private MovieExec studioPresident;
 
     // Empty constructor
     public Studio() {}
 
     // Constructor
-    public Studio(String name, String address, MovieExec movieExec) {
+    public Studio(String name, String address, MovieExec studioPresident) {
         this.setName(name);
         this.setAddress(address);
-        //this.setMovieExec(movieExec);
+        this.setStudioPresident(studioPresident);
     }
 
     // Getters and Setters
@@ -65,21 +71,19 @@ public class Studio implements Serializable {
         this.address = address;
     }
 
-    /*
-    public MovieExec getMovieExec() {
-        return movieExec;
-    }
-
-    public void setMovieExec(MovieExec movieExec) {
-        this.movieExec = movieExec;
-    }
-    */
-
     public Integer getPresCertN() {
         return presCertN;
     }
 
     public void setPresCertN(Integer presCertN) {
         this.presCertN = presCertN;
+    }
+
+    public MovieExec getStudioPresident() {
+        return studioPresident;
+    }
+
+    public void setStudioPresident(MovieExec studioPresident) {
+        this.studioPresident = studioPresident;
     }
 }

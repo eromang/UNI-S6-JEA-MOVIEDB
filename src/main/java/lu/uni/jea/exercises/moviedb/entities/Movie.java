@@ -1,8 +1,12 @@
 package lu.uni.jea.exercises.moviedb.entities;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -39,49 +43,49 @@ public class Movie implements Serializable {
     private String inColor;
 
     // Implementation of the ManyToOne to MovieExec
+    // producerCertN mean producer in a studio
     // Movie table contain multiple occurrence of the same MovieExec
     // MovieExec table contain only a single instance of a uniq MovieExec
     // Cascade on update and delete and cannot be null
 
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="producerCertN", nullable=false)
+    @ManyToOne
+    @JoinColumn(name="producerCertN", referencedColumnName="certN", nullable=false)
     private MovieExec movieExec;
 
     // Implement the ManyToOne from Movie to Studio
     // Movie table contain multiple occurrences of the Movie(studioName) with same Movie(producerCertN)
     // But Studio table contain only 1 occurrence of Studio(name) + Studio(presCertN)
 
-    //@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    //@JoinColumn(name="studioName", referencedColumnName="name")
-    //private Studio studio;
-
     @ManyToOne
-    @JoinColumn(name="studioName", referencedColumnName="name")
+    @JoinColumn(name="studioName", referencedColumnName="name", nullable=false)
     private Studio studio;
 
-    // Todo implement OneToOne relation with composite primary key
-    // For StarsIn
+    // OneToMany relation with composite primary key
+    // A movie could have multiple stars
 
-    //@OneToOne
-    //@PrimaryKeyJoinColumns({
-    //        @PrimaryKeyJoinColumn(name="title", referencedColumnName="title"),
-    //        @PrimaryKeyJoinColumn(name="year", referencedColumnName="year")
-    //})
-    //private StarsIn starsIn;
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumns(value = {
+            @JoinColumn(name="title", referencedColumnName = "title", nullable = false, insertable = false, updatable = false),
+            @JoinColumn(name = "year", referencedColumnName = "year", nullable = false, insertable = false, updatable = false)
+    })
+    @NotFound(action = NotFoundAction.IGNORE)
+    private List<StarsIn> starsIn;
 
     // Empty constructor
 
     public Movie() {}
 
-    // TODO Constructor
+    // Constructor
+    // A movie has one title, one year of production, a length, a inColor, One movieExec with details
 
-    public Movie(String title, int year, int length, String inColor, MovieExec movieExec, Studio studio) {
+    public Movie(String title, int year, int length, String inColor, MovieExec movieExec, Studio studio, List<StarsIn> starsIn) {
         this.setTitle(title);
         this.setYear(year);
         this.setLength(length);
         this.setInColor(inColor);
         this.setMovieExec(movieExec);
         this.setStudio(studio);
+        this.setStarsIn(starsIn);
     }
 
     // Getters and Setters
@@ -132,5 +136,13 @@ public class Movie implements Serializable {
 
     public void setStudio(Studio studio) {
         this.studio = studio;
+    }
+
+    public List<StarsIn> getStarsIn() {
+        return starsIn;
+    }
+
+    public void setStarsIn(List<StarsIn> starsIn) {
+        this.starsIn = starsIn;
     }
 }

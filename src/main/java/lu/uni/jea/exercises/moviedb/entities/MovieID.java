@@ -3,6 +3,7 @@ package lu.uni.jea.exercises.moviedb.entities;
 import org.apache.log4j.Logger;
 
 import javax.persistence.Basic;
+import javax.persistence.Embeddable;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -17,6 +18,7 @@ import java.util.Objects;
  *
  */
 
+//@Embeddable
 public class MovieID implements Serializable {
 
     private static final long serialVersionUID = 1L;
