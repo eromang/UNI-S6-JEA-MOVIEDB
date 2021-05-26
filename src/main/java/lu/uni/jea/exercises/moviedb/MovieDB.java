@@ -24,7 +24,7 @@ public class MovieDB implements Serializable {
     private static final Logger logger = Logger.getLogger ( MovieDB.class );
 
     private List<Movie> movieList = new ArrayList<>();
-    private List<StarsIn> starsInList = new ArrayList<>();;
+    private List<StarsIn> starsInMovieList = new ArrayList<>();
     private Movie movie;
 
     private String movieTitle;
@@ -56,8 +56,10 @@ public class MovieDB implements Serializable {
     // Navigation
 
     public String editMovie(String title, int year) {
-        logger.info("Clicked on edit button");
-        logger.info("Edit movie " + title + " released in " + year);
+        logger.info("Clicked on view button");
+        logger.info("View movie " + title + " released in " + year);
+
+        starsInMovieList.clear();
 
         movie = movieDBEJBI.getMovie(title,year);
 
@@ -76,12 +78,42 @@ public class MovieDB implements Serializable {
         movieStudioPresidentAddress = movie.getStudio().getStudioPresident().getAddress();
         movieStudioPresidentNetWorth = movie.getStudio().getStudioPresident().getNetWorth();
 
+        // For debugging purpose
+        if(movie.getStarsIn().isEmpty()) {
+            logger.info("No stars in the movie");
+
+        } else {
+            // Debub
+            logger.info("Stars in the movie : " + movie.getStarsIn().size());
+            Iterator<StarsIn> iterator = movie.getStarsIn().iterator();
+            while (iterator.hasNext()) {
+                StarsIn starsIn = iterator.next();
+                logger.info("Star : " + starsIn.getName());
+                starsInMovieList.add(starsIn);
+            }
+
+            // Debug
+            logger.info("Stars in the movie : " + starsInMovieList.size());
+            Iterator<StarsIn> iterator2 = starsInMovieList.iterator();
+            while (iterator2.hasNext()) {
+                StarsIn starsIn = iterator2.next();
+                logger.info("Star : " + starsIn.getName());
+
+            }
+        }
+
+        /**
         // No stars in the movie
         if(movie.getStarsIn().size() == 0) {
+
+            logger.info("No stars in the movie");
             starsInName = "No stars";
+
         } else if(movie.getStarsIn().size() == 1) {
+
+            logger.info("One star in the movie");
             starsInList = movie.getStarsIn();
-            logger.info(starsInList);
+
             Iterator<StarsIn> iterator = starsInList.iterator();
             while(iterator.hasNext()){
                 StarsIn starsIn = iterator.next();
@@ -90,6 +122,7 @@ public class MovieDB implements Serializable {
         } else {
             starsInName = "More than one star";
         }
+         */
 
         return EDIT_MOVIE;
     }
@@ -210,5 +243,13 @@ public class MovieDB implements Serializable {
 
     public void setStarsInName(String starsInName) {
         this.starsInName = starsInName;
+    }
+
+    public List<StarsIn> getStarsInMovieList() {
+        return starsInMovieList;
+    }
+
+    public void setStarsInMovieList(List<StarsIn> starsInMovieList) {
+        this.starsInMovieList = starsInMovieList;
     }
 }

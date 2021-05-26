@@ -87,12 +87,15 @@
                 <p:fieldset legend="Stars Details">
                     <p class="p-m-0">
 
-                        <p:panelGrid columns="2">
+                        <ui:fragment rendered="${empty moviedb.starsInMovieList}">
+                        <h:column>No stars in the movie</h:column>
+                        </ui:fragment>
 
-                            <h:outputText value="Star name :"/>
-                            <h:outputText value="#{moviedb.starsInName}"/>
-
-                        </p:panelGrid>
+                        <ui:fragment rendered="${not empty moviedb.starsInMovieList}">
+                        <h:dataTable value="#{moviedb.starsInMovieList}" var="starsIn">
+                            <h:column>Star name : #{starsIn.name}</h:column>
+                        </h:dataTable>
+                        </ui:fragment>
 
                     </p>
                 </p:fieldset>

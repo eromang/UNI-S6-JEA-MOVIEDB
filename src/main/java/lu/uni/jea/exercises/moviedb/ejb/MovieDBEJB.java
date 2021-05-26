@@ -31,10 +31,6 @@ public class MovieDBEJB implements MovieDBEJBI {
     @PersistenceContext(unitName = "Movie-DB")
     private EntityManager em;
 
-    private MovieExec movieExec;
-
-    private String movieName;
-    private String movieExecName;
 
     /**
      *
@@ -57,22 +53,5 @@ public class MovieDBEJB implements MovieDBEJBI {
         return movie;
     }
 
-    // TODO: To adapt to need
 
-    public String getMovieName() {
-        MovieID movieID = new MovieID("Skyfall",2012);
-        Movie movie = em.find(Movie.class, movieID);
-
-        movieName = movie.getTitle();
-        return movieName;
-    }
-
-    public String getMovieExecName() {
-        MovieID movieID = new MovieID("Skyfall",2012);
-        Movie movie = em.find(Movie.class, movieID);
-
-        movieExec = movie.getMovieExec();
-        movieExecName = movieExec.getName();
-        return movieExecName;
-    }
 }

@@ -34,10 +34,6 @@ public class Studio implements Serializable {
     // MovieExec table contain only a single instance of a uniq MovieExec
     // Cascade on update and delete and cannot be null
 
-    //@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    //@JoinColumn(name="presCertN", nullable=false, insertable = false, updatable = false)
-    //private MovieExec studioPresident;
-
     @ManyToOne
     @JoinColumn(name="presCertN", referencedColumnName="certN", nullable=false,
             insertable = false, updatable = false)

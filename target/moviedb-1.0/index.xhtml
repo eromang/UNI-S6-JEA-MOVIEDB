@@ -27,7 +27,17 @@
                 </p:column>
 
                 <p:column headerText="In color">
-                    <h:outputText value="#{ml.inColor}" />
+                    <ui:fragment rendered="${ml.inColor eq 'T'}">
+                    <h:outputText value="True" />
+                    </ui:fragment>
+
+                    <ui:fragment rendered="${ml.inColor eq 'C'}">
+                        <h:outputText value="Color" />
+                    </ui:fragment>
+
+                    <ui:fragment rendered="${ml.inColor eq 'F'}">
+                        <h:outputText value="False" />
+                    </ui:fragment>
                 </p:column>
 
                 <p:column headerText="Producer">
@@ -40,7 +50,7 @@
 
                 <p:column headerText="Actions">
                     <h:form>
-                        <h:commandButton id="edit" action="#{moviedb.editMovie(ml.title,ml.year)}" value="Edit"/>
+                        <h:commandButton id="edit" action="#{moviedb.editMovie(ml.title,ml.year)}" value="Details"/>
                     </h:form>
                 </p:column>
             </p:dataTable>
