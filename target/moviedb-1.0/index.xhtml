@@ -10,8 +10,21 @@
     <title>UNI S6 JEA - Exercise 3 - Movie DB - Eric ROMANG</title>
 </h:head>
 <h:body>
-    <h1>UNI S6 JEA - Exercise 3 - Movie DB - Eric ROMANG</h1>
-
+    <h1>Find Movies</h1>
+    <p>Please input the year of the movies:</p>
+    <div>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="Movie year: " />
+                <h:inputText value="#{moviedb.searchedMoviesYear}" required="true" />
+                <h:commandButton value="Find movies information"
+                                 action="#{moviedb.searchMoviesByYear}"/>
+            </h:panelGrid>
+        </h:form>
+    </div>
+    <br />
+    <h1>Full list of Movies</h1>
+    <br />
         <div class="card">
             <p:dataTable var="ml" value="#{moviedb.movieList}">
                 <p:column headerText="Movie Title">

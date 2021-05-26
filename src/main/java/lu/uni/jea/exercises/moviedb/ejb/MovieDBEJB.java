@@ -44,13 +44,23 @@ public class MovieDBEJB implements MovieDBEJBI {
 
     /**
      *
-     * @return A specific Movie
+     * @return Display a specific Movie
      */
 
     public Movie getMovie(String title, int year) {
         MovieID movieID = new MovieID(title,year);
         Movie movie = em.find(Movie.class, movieID);
         return movie;
+    }
+
+    /**
+     * Search movies by year
+     */
+
+    public List<Movie> getMovieListByYear(int searchedMoviesYear) {
+        TypedQuery<Movie> query = em.createNamedQuery("Movie.getMovieListByYear", Movie.class);
+        query.setParameter("searchedYear", searchedMoviesYear);
+        return query.getResultList();
     }
 
 

@@ -10,9 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Named("moviedb")
 @SessionScoped
@@ -20,10 +18,12 @@ public class MovieDB implements Serializable {
 
     private static final String EDIT_MOVIE = "editMovie";
     private static final String BACK = "back";
+    private static final String SEARCH = "search";
 
     private static final Logger logger = Logger.getLogger ( MovieDB.class );
 
     private List<Movie> movieList = new ArrayList<>();
+    private List<Movie> searchedMoviesList = new ArrayList<>();
     private List<StarsIn> starsInMovieList = new ArrayList<>();
     private Movie movie;
 
@@ -44,6 +44,8 @@ public class MovieDB implements Serializable {
 
     private int starsInCount;
     private String starsInName;
+
+    private int searchedMoviesYear;
 
     @EJB
     private MovieDBEJBI movieDBEJBI;
@@ -102,28 +104,6 @@ public class MovieDB implements Serializable {
             }
         }
 
-        /**
-        // No stars in the movie
-        if(movie.getStarsIn().size() == 0) {
-
-            logger.info("No stars in the movie");
-            starsInName = "No stars";
-
-        } else if(movie.getStarsIn().size() == 1) {
-
-            logger.info("One star in the movie");
-            starsInList = movie.getStarsIn();
-
-            Iterator<StarsIn> iterator = starsInList.iterator();
-            while(iterator.hasNext()){
-                StarsIn starsIn = iterator.next();
-                starsInName = starsIn.getName();
-            }
-        } else {
-            starsInName = "More than one star";
-        }
-         */
-
         return EDIT_MOVIE;
     }
 
@@ -131,6 +111,12 @@ public class MovieDB implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         logger.info("Return back");
         return BACK;
+    }
+
+    public String searchMoviesByYear() {
+        this.setSearchedMoviesYear(searchedMoviesYear);
+        searchedMoviesList = movieDBEJBI.getMovieListByYear(searchedMoviesYear);
+        return SEARCH;
     }
 
     // Getters and Setters
@@ -251,5 +237,21 @@ public class MovieDB implements Serializable {
 
     public void setStarsInMovieList(List<StarsIn> starsInMovieList) {
         this.starsInMovieList = starsInMovieList;
+    }
+
+    public int getSearchedMoviesYear() {
+        return searchedMoviesYear;
+    }
+
+    public void setSearchedMoviesYear(int searchedMoviesYear) {
+        this.searchedMoviesYear = searchedMoviesYear;
+    }
+
+    public List<Movie> getSearchedMoviesList() {
+        return searchedMoviesList;
+    }
+
+    public void setSearchedMoviesList(List<Movie> searchedMoviesList) {
+        this.searchedMoviesList = searchedMoviesList;
     }
 }

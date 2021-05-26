@@ -9,6 +9,10 @@
             <from-outcome>editMovie</from-outcome>
             <to-view-id>/editmovie.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>search</from-outcome>
+            <to-view-id>/searchresult.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
@@ -16,6 +20,18 @@
         <navigation-case>
             <from-outcome>back</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/searchresult.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>editMovie</from-outcome>
+            <to-view-id>/editmovie.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 

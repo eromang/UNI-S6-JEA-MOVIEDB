@@ -22,7 +22,9 @@ import java.util.List;
 @Table(name = "Movie")
 @NamedQueries({
         @NamedQuery(name = "Movie.getMovieList",
-                query = "SELECT p FROM Movie p")
+                query = "SELECT p FROM Movie p"),
+        @NamedQuery(name = "Movie.getMovieListByYear",
+                query = "SELECT p FROM Movie p WHERE p.year = :searchedYear")
 })
 public class Movie implements Serializable {
 
