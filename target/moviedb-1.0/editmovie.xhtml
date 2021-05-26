@@ -103,11 +103,14 @@
         </tr>
     </table>
     <br/>
-    <div>
-        <h:form>
-            <h:commandButton id="back" action="#{moviedb.back}" value="Back"/>
-        </h:form>
-    </div>
+
+    <table>
+            <tr>
+                <td><h:form><h:commandButton id="back" action="#{moviedb.back}" value="Back"/></h:form></td>
+                <td><h:form><h:commandButton id="addMovie" action="#{moviedb.addMovie}" value="Add movie"/></h:form></td>
+            </tr>
+    </table>
+
 
 </h:body>
 </html>

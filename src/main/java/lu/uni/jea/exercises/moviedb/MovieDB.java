@@ -19,6 +19,7 @@ public class MovieDB implements Serializable {
     private static final String EDIT_MOVIE = "editMovie";
     private static final String BACK = "back";
     private static final String SEARCH = "search";
+    private static final String ADD_MOVIE = "addmovie";
 
     private static final Logger logger = Logger.getLogger ( MovieDB.class );
 
@@ -111,6 +112,11 @@ public class MovieDB implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         logger.info("Return back");
         return BACK;
+    }
+
+    public String addMovie() {
+        logger.info("Add movie");
+        return ADD_MOVIE;
     }
 
     public String searchMoviesByYear() {
