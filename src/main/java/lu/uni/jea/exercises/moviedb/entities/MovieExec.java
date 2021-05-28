@@ -45,6 +45,10 @@ public class MovieExec implements Serializable {
         this.setNetWorth(netWorth);
     }
 
+    public MovieExec(Integer certN) {
+        this.setCertN(certN);
+    }
+
     // Getters and Setters
 
     public Integer getCertN() {

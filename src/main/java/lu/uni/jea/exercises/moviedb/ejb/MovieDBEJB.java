@@ -1,9 +1,11 @@
 package lu.uni.jea.exercises.moviedb.ejb;
 
 
+import lu.uni.jea.exercises.moviedb.MovieDB;
 import lu.uni.jea.exercises.moviedb.entities.Movie;
 import lu.uni.jea.exercises.moviedb.entities.MovieExec;
 import lu.uni.jea.exercises.moviedb.entities.MovieID;
+import org.apache.log4j.Logger;
 
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
@@ -12,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import java.util.List;
 
@@ -27,6 +30,8 @@ import static javax.ejb.TransactionAttributeType.MANDATORY;
 
 @Stateless(name = "MovieDBEJB")
 public class MovieDBEJB implements MovieDBEJBI {
+
+    private static final Logger logger = Logger.getLogger ( MovieDBEJB.class );
 
     @PersistenceContext(unitName = "Movie-DB")
     private EntityManager em;
@@ -99,4 +104,26 @@ public class MovieDBEJB implements MovieDBEJBI {
         return query.getResultList();
     }
 
+    @Transactional
+    public void insertMovieWithQuery(Movie movie) {
+
+        logger.info("----Beginning Movie Add EJP debug----");
+        logger.info("Title : " + movie.getTitle());
+        logger.info("Year : " + movie.getYear());
+        logger.info("Length : " + movie.getLength());
+        logger.info("In color : " + movie.getInColor());
+        logger.info("Studio : " + movie.getStudio().getName());
+        logger.info("Producer CertN : " + movie.getMovieExec().getCertN());
+        //logger.info("Star Name : " + starsInName);
+        logger.info("----End Movie Add EJP debug----");
+
+        em.createNativeQuery("INSERT INTO Movie (title, year, length, inColor, studioName, producerCertN) VALUES (?,?,?,?,?,?)")
+                .setParameter(1, movie.getTitle())
+                .setParameter(2, movie.getYear())
+                .setParameter(3, movie.getLength())
+                .setParameter(4, movie.getInColor())
+                .setParameter(5, movie.getStudio().getName())
+                .setParameter(6, movie.getMovieExec().getCertN())
+                .executeUpdate();
+    }
 }

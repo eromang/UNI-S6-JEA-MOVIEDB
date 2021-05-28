@@ -4,6 +4,7 @@ import lu.uni.jea.exercises.moviedb.ejb.MovieDBEJBI;
 import lu.uni.jea.exercises.moviedb.entities.Movie;
 import lu.uni.jea.exercises.moviedb.entities.MovieExec;
 import lu.uni.jea.exercises.moviedb.entities.StarsIn;
+import lu.uni.jea.exercises.moviedb.entities.Studio;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -186,6 +187,11 @@ public class MovieDB implements Serializable {
         logger.info("Producer CertN : " + movieExecCertN);
         logger.info("Star Name : " + starsInName);
         logger.info("----End Movie Add debug----");
+
+        MovieExec movieExec = new MovieExec(movieExecCertN);
+        Studio studio = new Studio(movieStudio);
+        Movie movie = new Movie(movieTitle, movieYear, movieLength, movieInColor, movieExec, studio);
+        movieDBEJBI.insertMovieWithQuery(movie);
 
         return HOME;
     }

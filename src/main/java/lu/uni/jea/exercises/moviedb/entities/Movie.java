@@ -82,14 +82,13 @@ public class Movie implements Serializable {
     // Constructor
     // A movie has one title, one year of production, a length, a inColor, One movieExec with details
 
-    public Movie(String title, int year, int length, String inColor, MovieExec movieExec, Studio studio, List<StarsIn> starsIn) {
+    public Movie(String title, Integer year, Integer length, String inColor, MovieExec movieExec, Studio studio) {
         this.setTitle(title);
         this.setYear(year);
         this.setLength(length);
         this.setInColor(inColor);
         this.setMovieExec(movieExec);
         this.setStudio(studio);
-        this.setStarsIn(starsIn);
     }
 
     // Getters and Setters

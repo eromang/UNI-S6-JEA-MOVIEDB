@@ -51,6 +51,10 @@ public class Studio implements Serializable {
         this.setStudioPresident(studioPresident);
     }
 
+    public Studio(String name) {
+        this.setName(name);
+    }
+
     // Getters and Setters
 
     public String getName() {
