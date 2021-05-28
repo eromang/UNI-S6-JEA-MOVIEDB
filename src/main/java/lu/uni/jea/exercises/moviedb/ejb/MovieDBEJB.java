@@ -5,6 +5,7 @@ import lu.uni.jea.exercises.moviedb.MovieDB;
 import lu.uni.jea.exercises.moviedb.entities.Movie;
 import lu.uni.jea.exercises.moviedb.entities.MovieExec;
 import lu.uni.jea.exercises.moviedb.entities.MovieID;
+import lu.uni.jea.exercises.moviedb.entities.StarsIn;
 import org.apache.log4j.Logger;
 
 import javax.ejb.Stateful;
@@ -106,6 +107,23 @@ public class MovieDBEJB implements MovieDBEJBI {
         return query.getResultList();
     }
 
+    /**
+     *
+     * @return The max ID of StarsIn
+     */
+
+    public Integer getMaxStarsInID() {
+        TypedQuery<Integer> query = em.createNamedQuery("StarsIn.getMaxID", Integer.class);
+        logger.info("Max ID NamedQuery : " + query.getSingleResult());
+        return query.getSingleResult();
+    }
+
+    /**
+     *
+     * @param movie
+     * @return success or failure for query execution
+     */
+
     @Transactional
     public String insertMovieWithQuery(Movie movie) {
 
@@ -127,6 +145,37 @@ public class MovieDBEJB implements MovieDBEJBI {
                     .setParameter(4, movie.getInColor())
                     .setParameter(5, movie.getStudio().getName())
                     .setParameter(6, movie.getMovieExec().getCertN())
+                    .executeUpdate();
+            logger.info("----Success insert----");
+            return "success";
+        } catch (Exception e) {
+            logger.info("----Insert error----");
+            return "failure";
+        }
+    }
+
+    /**
+     *
+     * @param starsIn
+     * @return success or failure for query execution
+     */
+
+    @Transactional
+    public String insertMovieStarWithQuery(StarsIn starsIn) {
+
+        logger.info("----Beginning Stars Add EJP debug----");
+        logger.info("Title : " + starsIn.getTitle());
+        logger.info("Year : " + starsIn.getYear());
+        logger.info("Name : " + starsIn.getName());
+        logger.info("----End Stars Add EJP debug----");
+
+        try {
+
+            em.createNativeQuery("INSERT INTO StarsIn (id, title, year, name) VALUES (?,?,?,?)")
+                    .setParameter(1, starsIn.getId())
+                    .setParameter(2, starsIn.getTitle())
+                    .setParameter(3, starsIn.getYear())
+                    .setParameter(4, starsIn.getName())
                     .executeUpdate();
             logger.info("----Success insert----");
             return "success";

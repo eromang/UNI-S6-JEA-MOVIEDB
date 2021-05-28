@@ -62,9 +62,12 @@ public class MovieDB implements Serializable {
     private Integer movieStudioPresidentNetWorth;
 
     private String starsInName;
+    private Integer maxID;
 
     private int searchedMoviesYear;
 
+    private String insertMovieResult = "No";
+    private String insertStartResult = "No";
     private String insertResult = "No";
 
     @EJB
@@ -202,16 +205,41 @@ public class MovieDB implements Serializable {
         MovieExec movieExec = new MovieExec(movieExecCertN);
         Studio studio = new Studio(movieStudio);
         Movie movie = new Movie(movieTitle, movieYear, movieLength, movieInColor, movieExec, studio);
-        String result = movieDBEJBI.insertMovieWithQuery(movie);
+        String movieResult = movieDBEJBI.insertMovieWithQuery(movie);
 
-        if(result.equals("success")) {
+        if(movieResult.equals("success")) {
+            insertMovieResult = "success";
+        } else {
+            insertMovieResult = "error";
+        }
+
+        if(starsInName == null) {
+            insertStartResult = "success";
+        } else {
+
+            // Get the latest starsIn MAX(id)
+            maxID = movieDBEJBI.getMaxStarsInID();
+            logger.info("Max ID Bean : " + maxID);
+            maxID = maxID + 1;
+            logger.info("Max ID Bean ++ : " + maxID);
+
+            StarsIn starsIn = new StarsIn(maxID, movieTitle, movieYear, starsInName);
+            String starsInResult = movieDBEJBI.insertMovieStarWithQuery(starsIn);
+
+            if(starsInResult.equals("success")) {
+                insertStartResult = "success";
+            } else {
+                insertStartResult = "error";
+            }
+        }
+
+        if(insertMovieResult.equals("success") && insertStartResult.equals("success")) {
             insertResult = "success";
         } else {
             insertResult = "error";
         }
 
         return HOME;
-        //return "test";
     }
 
 
@@ -350,6 +378,22 @@ public class MovieDB implements Serializable {
 
     public void setMovieExecCertN(Integer movieExecCertN) {
         this.movieExecCertN = movieExecCertN;
+    }
+
+    public String getInsertMovieResult() {
+        return insertMovieResult;
+    }
+
+    public void setInsertMovieResult(String insertMovieResult) {
+        this.insertMovieResult = insertMovieResult;
+    }
+
+    public String getInsertStartResult() {
+        return insertStartResult;
+    }
+
+    public void setInsertStartResult(String insertStartResult) {
+        this.insertStartResult = insertStartResult;
     }
 
     public String getInsertResult() {

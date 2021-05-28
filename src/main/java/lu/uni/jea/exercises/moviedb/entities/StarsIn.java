@@ -14,15 +14,20 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "StarsIn")
-@NamedQuery(name = "StarsIn.getDistinctStarsIn",
-        query = "SELECT distinct s.name AS name FROM StarsIn s")
+@NamedQueries({
+        @NamedQuery(name = "StarsIn.getDistinctStarsIn",
+                query = "SELECT distinct s.name AS name FROM StarsIn s"),
+        @NamedQuery(name = "StarsIn.getMaxID",
+                query = "SELECT MAX(id) FROM StarsIn")
+
+})
 public class StarsIn implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @NotNull
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.TABLE)
     private Integer id;
 
     @Basic
@@ -36,6 +41,17 @@ public class StarsIn implements Serializable {
     @Basic
     @NotNull
     private Integer year;
+
+    // Default constructor
+    public StarsIn() {}
+
+    // Constructor
+    public StarsIn(Integer id, String title, Integer year, String name) {
+        this.setId(id);
+        this.setTitle(title);
+        this.setYear(year);
+        this.setName(name);
+    }
 
     // Getters and Setters
 
