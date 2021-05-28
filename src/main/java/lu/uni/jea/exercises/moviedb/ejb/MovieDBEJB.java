@@ -63,5 +63,40 @@ public class MovieDBEJB implements MovieDBEJBI {
         return query.getResultList();
     }
 
+    /**
+     * Get distinct inColor
+     */
+
+    public List<String> getDistinctInColor() {
+        TypedQuery<String> query = em.createNamedQuery("Movie.getDistinctInColor", String.class);
+        return query.getResultList();
+    }
+
+    /**
+     * Get distinct Studio
+     */
+
+    public List<String> getDistinctStudio() {
+        TypedQuery<String> query = em.createNamedQuery("Studio.getDistinctStudio", String.class);
+        return query.getResultList();
+    }
+
+    /**
+     * Get distinct Producer
+     */
+
+    public List<String> getDistinctProducer() {
+        TypedQuery<String> query = em.createNamedQuery("MovieExec.getDistinctProducer", String.class);
+        return query.getResultList();
+    }
+
+    /**
+     * Get distinct StarsIn
+     */
+
+    public List<String> getDistinctStarsIn() {
+        TypedQuery<String> query = em.createNamedQuery("StarsIn.getDistinctStarsIn", String.class);
+        return query.getResultList();
+    }
 
 }

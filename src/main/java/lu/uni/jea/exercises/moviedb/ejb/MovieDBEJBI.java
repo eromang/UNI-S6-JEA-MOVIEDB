@@ -8,4 +8,8 @@ public interface MovieDBEJBI {
     public List<Movie> getMovieList();
     public Movie getMovie(String title, int year);
     public List<Movie> getMovieListByYear(int searchedMoviesYear);
+    public List<String> getDistinctInColor();
+    public List<String> getDistinctStudio();
+    public List<String> getDistinctProducer();
+    public List<String> getDistinctStarsIn();
 }

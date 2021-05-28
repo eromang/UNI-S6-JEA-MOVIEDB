@@ -14,6 +14,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "Studio")
+@NamedQuery(name = "Studio.getDistinctStudio",
+        query = "SELECT distinct s.name AS name FROM Studio s")
 public class Studio implements Serializable {
 
     private static final long serialVersionUID = 1L;

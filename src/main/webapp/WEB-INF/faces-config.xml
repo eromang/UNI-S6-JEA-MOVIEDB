@@ -22,7 +22,7 @@
     <navigation-rule>
         <from-view-id>/editmovie.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>back</from-outcome>
+            <from-outcome>home</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
@@ -34,8 +34,8 @@
     <navigation-rule>
         <from-view-id>/searchresult.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>back</from-outcome>
-            <to-view-id>/editmovie.xhtml</to-view-id>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>editMovie</from-outcome>
@@ -44,6 +44,14 @@
         <navigation-case>
             <from-outcome>addmovie</from-outcome>
             <to-view-id>/newMovie.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/newMovie.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 

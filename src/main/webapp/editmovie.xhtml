@@ -10,7 +10,7 @@
     <title>UNI S6 JEA - Exercise 3 - Movie details - Eric ROMANG</title>
 </h:head>
 <h:body>
-    <h1>UNI S6 JEA - Exercise 3 - Movie details - Eric ROMANG</h1>
+    <h1>Movie details</h1>
 
     <table>
         <tr style="vertical-align: top">
@@ -106,7 +106,7 @@
 
     <table>
             <tr>
-                <td><h:form><h:commandButton id="back" action="#{moviedb.back}" value="Back"/></h:form></td>
+                <td><h:form><h:commandButton id="back" onclick="history.go(-1);return false;" value="Back"/></h:form></td>
                 <td><h:form><h:commandButton id="addMovie" action="#{moviedb.addMovie}" value="Add movie"/></h:form></td>
             </tr>
     </table>

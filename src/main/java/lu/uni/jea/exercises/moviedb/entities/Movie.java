@@ -24,7 +24,9 @@ import java.util.List;
         @NamedQuery(name = "Movie.getMovieList",
                 query = "SELECT p FROM Movie p"),
         @NamedQuery(name = "Movie.getMovieListByYear",
-                query = "SELECT p FROM Movie p WHERE p.year = :searchedYear")
+                query = "SELECT p FROM Movie p WHERE p.year = :searchedYear"),
+        @NamedQuery(name = "Movie.getDistinctInColor",
+                query = "SELECT distinct p.inColor AS inColor FROM Movie p")
 })
 public class Movie implements Serializable {
 

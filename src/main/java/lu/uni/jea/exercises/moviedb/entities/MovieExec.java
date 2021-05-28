@@ -14,6 +14,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "MovieExec")
+@NamedQuery(name = "MovieExec.getDistinctProducer",
+        query = "SELECT distinct p.name AS name FROM MovieExec p")
 public class MovieExec implements Serializable {
 
     private static final long serialVersionUID = 1L;

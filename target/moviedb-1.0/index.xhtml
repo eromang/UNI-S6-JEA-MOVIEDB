@@ -15,8 +15,8 @@
     <div>
         <h:form>
             <h:panelGrid columns="2">
-                <h:outputText value="Movie year: " />
-                <h:inputText value="#{moviedb.searchedMoviesYear}" required="true" />
+                <h:outputText value="Movie year (yyyy): " />
+                <p:inputMask id="year" value="#{moviedb.searchedMoviesYear}" mask="9999"/>
                 <h:commandButton value="Find movies information"
                                  action="#{moviedb.searchMoviesByYear}"/>
             </h:panelGrid>

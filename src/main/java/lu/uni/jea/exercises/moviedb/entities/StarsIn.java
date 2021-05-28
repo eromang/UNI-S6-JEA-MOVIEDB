@@ -14,6 +14,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "StarsIn")
+@NamedQuery(name = "StarsIn.getDistinctStarsIn",
+        query = "SELECT distinct s.name AS name FROM StarsIn s")
 public class StarsIn implements Serializable {
 
     private static final long serialVersionUID = 1L;

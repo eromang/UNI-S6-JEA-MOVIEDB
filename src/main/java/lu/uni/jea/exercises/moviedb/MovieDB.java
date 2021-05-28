@@ -5,10 +5,12 @@ import lu.uni.jea.exercises.moviedb.entities.Movie;
 import lu.uni.jea.exercises.moviedb.entities.StarsIn;
 import org.apache.log4j.Logger;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.*;
 
@@ -17,7 +19,7 @@ import java.util.*;
 public class MovieDB implements Serializable {
 
     private static final String EDIT_MOVIE = "editMovie";
-    private static final String BACK = "back";
+    private static final String HOME = "home";
     private static final String SEARCH = "search";
     private static final String ADD_MOVIE = "addmovie";
 
@@ -26,11 +28,15 @@ public class MovieDB implements Serializable {
     private List<Movie> movieList = new ArrayList<>();
     private List<Movie> searchedMoviesList = new ArrayList<>();
     private List<StarsIn> starsInMovieList = new ArrayList<>();
+    private List<String> distinctInColor = new ArrayList<>();
+    private List<String> distinctStudio = new ArrayList<>();
+    private List<String> distinctProducer = new ArrayList<>();
+    private List<String> distinctStarsIn = new ArrayList<>();
     private Movie movie;
 
     private String movieTitle;
-    private int movieYear;
-    private int movieLength;
+    private Integer movieYear;
+    private Integer movieLength;
     private String movieInColor;
 
     private String movieExecName;
@@ -41,7 +47,7 @@ public class MovieDB implements Serializable {
     private String movieStudioAddress;
     private String movieStudioPresident;
     private String movieStudioPresidentAddress;
-    private int movieStudioPresidentNetWorth;
+    private Integer movieStudioPresidentNetWorth;
 
     private int starsInCount;
     private String starsInName;
@@ -58,7 +64,7 @@ public class MovieDB implements Serializable {
 
     // Navigation
 
-    public String editMovie(String title, int year) {
+    public String editMovie(String title, Integer year) {
         logger.info("Clicked on view button");
         logger.info("View movie " + title + " released in " + year);
 
@@ -104,17 +110,15 @@ public class MovieDB implements Serializable {
 
             }
         }
-
         return EDIT_MOVIE;
     }
 
-    public String back() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        logger.info("Return back");
-        return BACK;
-    }
-
     public String addMovie() {
+
+        setMovieTitle(null);
+        setMovieYear(null);
+        setMovieLength(null);
+
         logger.info("Add movie");
         return ADD_MOVIE;
     }
@@ -133,6 +137,47 @@ public class MovieDB implements Serializable {
         return movieList;
     }
 
+    // Get distinct inColor
+    public List<String> getDistinctInColor() {
+        distinctInColor = movieDBEJBI.getDistinctInColor();
+
+        // Debug
+        logger.info("Distinct inColor : " + distinctInColor.size());
+        Iterator<String> iterator = distinctInColor.iterator();
+        while (iterator.hasNext()) {
+            String inColor = iterator.next();
+            logger.info("inColor : " + inColor);
+
+        }
+        return distinctInColor;
+    }
+
+    // Get distinct Studio
+    public List<String> getDistinctStudio() {
+        distinctStudio = movieDBEJBI.getDistinctStudio();
+        return distinctStudio;
+    }
+
+    // Get distinct Producer
+    public List<String> getDistinctProducer() {
+        distinctProducer = movieDBEJBI.getDistinctProducer();
+        return distinctProducer;
+    }
+
+    // Get distinct StarsIn
+    public List<String> getDistinctStarsIn() {
+        distinctStarsIn = movieDBEJBI.getDistinctStarsIn();
+        return distinctStarsIn;
+    }
+
+    // Save Movie
+
+    public String saveMovie() {
+        return HOME;
+    }
+
+
+
     public String getMovieTitle() {
         return movieTitle;
     }
@@ -141,19 +186,19 @@ public class MovieDB implements Serializable {
         this.movieTitle = movieTitle;
     }
 
-    public int getMovieYear() {
+    public Integer getMovieYear() {
         return movieYear;
     }
 
-    public void setMovieYear(int movieYear) {
+    public void setMovieYear(Integer movieYear) {
         this.movieYear = movieYear;
     }
 
-    public int getMovieLength() {
+    public Integer getMovieLength() {
         return movieLength;
     }
 
-    public void setMovieLength(int movieLength) {
+    public void setMovieLength(Integer movieLength) {
         this.movieLength = movieLength;
     }
 
@@ -189,11 +234,11 @@ public class MovieDB implements Serializable {
         this.movieExecAddress = movieExecAddress;
     }
 
-    public int getMovieExecNetWorth() {
+    public Integer getMovieExecNetWorth() {
         return movieExecNetWorth;
     }
 
-    public void setMovieExecNetWorth(int movieExecNetWorth) {
+    public void setMovieExecNetWorth(Integer movieExecNetWorth) {
         this.movieExecNetWorth = movieExecNetWorth;
     }
 

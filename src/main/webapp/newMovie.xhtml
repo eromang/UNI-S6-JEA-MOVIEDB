@@ -1,11 +1,63 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en">
+<h:head>
+    <title>UNI S6 JEA - Exercise 3 - Add movie - Eric ROMANG</title>
+</h:head>
+<h:body>
+    <p:fieldset legend="Add movie">
+        <p class="p-m-0">
+
+            <p:panelGrid columns="2">
+
+                <h:outputText value="Title:"/>
+                <p:inputText value="#{moviedb.movieTitle}"/>
+
+                <h:outputText value="Release year (yyyy):"/>
+                <p:inputMask id="year" value="#{moviedb.movieYear}" mask="9999"/>
+
+                <h:outputText value="Length (min):"/>
+                <p:inputNumber id="lenght" value="#{moviedb.movieLength}" minValue="1"
+                               maxValue="250" decimalPlaces="0" />
+
+                <h:outputText value="In color:"/>
+                <p:selectOneMenu id="inColor" value="#{moviedb.movieInColor} ">
+                    <f:selectItems value="#{moviedb.distinctInColor}"></f:selectItems>
+                </p:selectOneMenu>
+
+                <h:outputText value="Studio:"/>
+                <p:selectOneMenu id="studio" value="#{moviedb.movieStudio} ">
+                    <f:selectItems value="#{moviedb.distinctStudio}"></f:selectItems>
+                </p:selectOneMenu>
+
+                <h:outputText value="Producer:"/>
+                <p:selectOneMenu id="producer" value="#{moviedb.movieExecName} ">
+                    <f:selectItems value="#{moviedb.distinctProducer}"></f:selectItems>
+                </p:selectOneMenu>
+
+                <h:outputText value="Stars In:"/>
+                <p:selectOneMenu id="starsIn" value="#{moviedb.starsInName} ">
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItems value="#{moviedb.distinctStarsIn}"></f:selectItems>
+                </p:selectOneMenu>
+
+            </p:panelGrid>
+
+        </p>
+    </p:fieldset>
+
+    <table>
+        <tr>
+            <td><h:form><h:commandButton id="back" onclick="history.go(-1);return false;" value="Back"/></h:form></td>
+            <td><h:form><h:commandButton id="saveMovie" action="#{moviedb.saveMovie}" value="Save"/></h:form></td>
+        </tr>
+    </table>
+
+
+</h:body>
 </html>
