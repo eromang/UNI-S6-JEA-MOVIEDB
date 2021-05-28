@@ -135,6 +135,10 @@ public class MovieDB implements Serializable {
         setMovieTitle(null);
         setMovieYear(null);
         setMovieLength(null);
+        setMovieInColor(null);
+        setMovieStudio(null);
+        setMovieExecName(null);
+        setStarsInName(null);
 
         logger.info("Add movie");
         return ADD_MOVIE;
