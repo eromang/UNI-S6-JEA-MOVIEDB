@@ -23,6 +23,13 @@
         </h:form>
     </div>
     <br />
+    <ui:fragment rendered="${moviedb.insertResult eq 'success'}">
+        <p:staticMessage severity="info" summary="INFO" detail="Insert successful" style="width: 100%"/>
+    </ui:fragment>
+    <ui:fragment rendered="${moviedb.insertResult eq 'error'}">
+        <p:staticMessage severity="error" summary="ERROR" detail="Insert Error" style="width: 100%"/>
+    </ui:fragment>
+    <br />
     <h1>Full list of Movies</h1>
     <br />
         <div class="card">

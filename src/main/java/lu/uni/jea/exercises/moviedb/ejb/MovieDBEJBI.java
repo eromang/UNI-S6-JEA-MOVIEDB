@@ -13,5 +13,5 @@ public interface MovieDBEJBI {
     public List<String> getDistinctStudio();
     public List<MovieExec> getDistinctProducer();
     public List<String> getDistinctStarsIn();
-    public void insertMovieWithQuery(Movie movie);
+    public String insertMovieWithQuery(Movie movie);
 }

@@ -10,6 +10,8 @@ import org.apache.log4j.Logger;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
@@ -105,7 +107,7 @@ public class MovieDBEJB implements MovieDBEJBI {
     }
 
     @Transactional
-    public void insertMovieWithQuery(Movie movie) {
+    public String insertMovieWithQuery(Movie movie) {
 
         logger.info("----Beginning Movie Add EJP debug----");
         logger.info("Title : " + movie.getTitle());
@@ -117,13 +119,20 @@ public class MovieDBEJB implements MovieDBEJBI {
         //logger.info("Star Name : " + starsInName);
         logger.info("----End Movie Add EJP debug----");
 
-        em.createNativeQuery("INSERT INTO Movie (title, year, length, inColor, studioName, producerCertN) VALUES (?,?,?,?,?,?)")
-                .setParameter(1, movie.getTitle())
-                .setParameter(2, movie.getYear())
-                .setParameter(3, movie.getLength())
-                .setParameter(4, movie.getInColor())
-                .setParameter(5, movie.getStudio().getName())
-                .setParameter(6, movie.getMovieExec().getCertN())
-                .executeUpdate();
+        try {
+            em.createNativeQuery("INSERT INTO Movie (title, year, length, inColor, studioName, producerCertN) VALUES (?,?,?,?,?,?)")
+                    .setParameter(1, movie.getTitle())
+                    .setParameter(2, movie.getYear())
+                    .setParameter(3, movie.getLength())
+                    .setParameter(4, movie.getInColor())
+                    .setParameter(5, movie.getStudio().getName())
+                    .setParameter(6, movie.getMovieExec().getCertN())
+                    .executeUpdate();
+            logger.info("----Success insert----");
+            return "success";
+        } catch (Exception e) {
+            logger.info("----Insert error----");
+            return "failure";
+        }
     }
 }

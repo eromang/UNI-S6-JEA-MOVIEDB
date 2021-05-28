@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.awt.event.ActionEvent;
@@ -52,10 +53,11 @@ public class MovieDB implements Serializable {
     private String movieStudioPresidentAddress;
     private Integer movieStudioPresidentNetWorth;
 
-    private int starsInCount;
     private String starsInName;
 
     private int searchedMoviesYear;
+
+    private String insertResult = "No";
 
     @EJB
     private MovieDBEJBI movieDBEJBI;
@@ -63,6 +65,7 @@ public class MovieDB implements Serializable {
     // Constructor
     public MovieDB() {
         logger.info("Start Movie DB");
+        //insertResult = "No";
     }
 
     // Navigation
@@ -191,9 +194,16 @@ public class MovieDB implements Serializable {
         MovieExec movieExec = new MovieExec(movieExecCertN);
         Studio studio = new Studio(movieStudio);
         Movie movie = new Movie(movieTitle, movieYear, movieLength, movieInColor, movieExec, studio);
-        movieDBEJBI.insertMovieWithQuery(movie);
+        String result = movieDBEJBI.insertMovieWithQuery(movie);
+
+        if(result.equals("success")) {
+            insertResult = "success";
+        } else {
+            insertResult = "error";
+        }
 
         return HOME;
+        //return "test";
     }
 
 
@@ -332,5 +342,13 @@ public class MovieDB implements Serializable {
 
     public void setMovieExecCertN(Integer movieExecCertN) {
         this.movieExecCertN = movieExecCertN;
+    }
+
+    public String getInsertResult() {
+        return insertResult;
+    }
+
+    public void setInsertResult(String insertResult) {
+        this.insertResult = insertResult;
     }
 }
