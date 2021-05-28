@@ -17,6 +17,14 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ *
+ * @author Eric ROMANG
+ * @professor Dr. Müller Volker
+ * @subject UNI S6 JEA - Exercise 3 - Movie DB
+ *
+ */
+
 @Named("moviedb")
 @SessionScoped
 public class MovieDB implements Serializable {
