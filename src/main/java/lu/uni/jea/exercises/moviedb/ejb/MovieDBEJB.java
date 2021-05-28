@@ -85,8 +85,8 @@ public class MovieDBEJB implements MovieDBEJBI {
      * Get distinct Producer
      */
 
-    public List<String> getDistinctProducer() {
-        TypedQuery<String> query = em.createNamedQuery("MovieExec.getDistinctProducer", String.class);
+    public List<MovieExec> getDistinctProducer() {
+        TypedQuery<MovieExec> query = em.createNamedQuery("MovieExec.getDistinctProducer", MovieExec.class);
         return query.getResultList();
     }
 

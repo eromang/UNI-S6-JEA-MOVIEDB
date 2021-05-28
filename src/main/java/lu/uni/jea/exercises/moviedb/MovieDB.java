@@ -2,6 +2,7 @@ package lu.uni.jea.exercises.moviedb;
 
 import lu.uni.jea.exercises.moviedb.ejb.MovieDBEJBI;
 import lu.uni.jea.exercises.moviedb.entities.Movie;
+import lu.uni.jea.exercises.moviedb.entities.MovieExec;
 import lu.uni.jea.exercises.moviedb.entities.StarsIn;
 import org.apache.log4j.Logger;
 
@@ -30,7 +31,7 @@ public class MovieDB implements Serializable {
     private List<StarsIn> starsInMovieList = new ArrayList<>();
     private List<String> distinctInColor = new ArrayList<>();
     private List<String> distinctStudio = new ArrayList<>();
-    private List<String> distinctProducer = new ArrayList<>();
+    private List<MovieExec> distinctProducer = new ArrayList<>();
     private List<String> distinctStarsIn = new ArrayList<>();
     private Movie movie;
 
@@ -40,6 +41,7 @@ public class MovieDB implements Serializable {
     private String movieInColor;
 
     private String movieExecName;
+    private Integer movieExecCertN;
     private String movieExecAddress;
     private int movieExecNetWorth;
 
@@ -159,7 +161,7 @@ public class MovieDB implements Serializable {
     }
 
     // Get distinct Producer
-    public List<String> getDistinctProducer() {
+    public List<MovieExec> getDistinctProducer() {
         distinctProducer = movieDBEJBI.getDistinctProducer();
         return distinctProducer;
     }
@@ -173,6 +175,18 @@ public class MovieDB implements Serializable {
     // Save Movie
 
     public String saveMovie() {
+
+        // Debug
+        logger.info("----Beginning Movie Add debug----");
+        logger.info("Title : " + movieTitle);
+        logger.info("Year : " + movieYear);
+        logger.info("Length : " + movieLength);
+        logger.info("In color : " + movieInColor);
+        logger.info("Studio : " + movieStudio);
+        logger.info("Producer CertN : " + movieExecCertN);
+        logger.info("Star Name : " + starsInName);
+        logger.info("----End Movie Add debug----");
+
         return HOME;
     }
 
@@ -304,5 +318,13 @@ public class MovieDB implements Serializable {
 
     public void setSearchedMoviesList(List<Movie> searchedMoviesList) {
         this.searchedMoviesList = searchedMoviesList;
+    }
+
+    public Integer getMovieExecCertN() {
+        return movieExecCertN;
+    }
+
+    public void setMovieExecCertN(Integer movieExecCertN) {
+        this.movieExecCertN = movieExecCertN;
     }
 }
